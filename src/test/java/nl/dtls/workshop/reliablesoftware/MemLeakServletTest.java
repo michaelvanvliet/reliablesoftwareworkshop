@@ -67,6 +67,7 @@ public class MemLeakServletTest {
         System.out.println("doGet");
         MemLeakServlet instance = new MemLeakServlet();
         instance.doGet(request, response);
+        //this is useless!!!
     }
 
     /**
