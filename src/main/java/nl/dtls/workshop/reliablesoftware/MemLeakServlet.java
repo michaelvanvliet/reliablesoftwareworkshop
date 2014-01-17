@@ -22,7 +22,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class MemLeakServlet extends HttpServlet {
 
-    private List<UUID> leak = new ArrayList<>();
+    private final List<UUID> leak;
+
+    public MemLeakServlet() {
+        this.leak = new ArrayList<>();
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,8 +41,7 @@ public class MemLeakServlet extends HttpServlet {
         // Leak a little bit to trigger a PMD warning.
         leak.add(UUID.randomUUID());
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -49,8 +52,6 @@ public class MemLeakServlet extends HttpServlet {
             out.println("<h1>Servlet MemLeakServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        } finally {
-            out.close();
         }
     }
 
