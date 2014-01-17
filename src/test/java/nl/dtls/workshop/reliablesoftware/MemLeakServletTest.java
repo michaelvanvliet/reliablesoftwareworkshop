@@ -87,7 +87,7 @@ public class MemLeakServletTest {
     public void testGetServletInfo() {
         System.out.println("getServletInfo");
         MemLeakServlet instance = new MemLeakServlet();
-        String expResult = "";
+        String expResult = "Short description";
         String result = instance.getServletInfo();
         assertEquals(expResult, result);
     }
